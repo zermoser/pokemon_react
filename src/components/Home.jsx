@@ -33,6 +33,11 @@ const Home = () => {
     setSearchQuery('');
   };
 
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   // Filtered pokemon based on search query
   const filteredPokemon = pokemon.filter((poke) =>
     poke.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -51,18 +56,20 @@ const Home = () => {
             />
           </div>
           <div className="h-[128px] bg-[#FAFAFA] p-3">
-            <h3 className="text-lg font-semibold">{poke.name}</h3>
+            <h3 className="text-lg font-semibold">{capitalizeFirstLetter(poke.name)}</h3>
             <div className="space-x-2 my-1">
               {(poke.types || []).map((type, idx) => (
                 <b
                   key={idx}
                   className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
                 >
-                  {type}
+                  {capitalizeFirstLetter(type)}
                 </b>
               ))}
             </div>
-            <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded">Detail</Link>
+            <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded hover:bg-[#FFAE33]">
+              Detail
+            </Link>
           </div>
         </div>
       ))}
@@ -82,7 +89,7 @@ const Home = () => {
           </div>
           <div className="h-[128px] ml-4 p-3 flex flex-col justify-between w-full">
             <div>
-              <h3 className="text-lg font-semibold">{poke.name}</h3>
+              <h3 className="text-lg font-semibold">{capitalizeFirstLetter(poke.name)}</h3>
               <div className="space-x-2 my-1">
                 {(poke.types || []).map((type, idx) => (
                   <b
@@ -93,7 +100,7 @@ const Home = () => {
                   </b>
                 ))}
               </div>
-              <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.join(', ')}</p>
+              <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.map(ability => capitalizeFirstLetter(ability)).join(', ')}</p>
             </div>
           </div>
         </Link>
@@ -135,7 +142,7 @@ const Home = () => {
       </div>
       <div className="relative group">
         <Link to="/pocket" className="flex items-center group mb-4">
-          <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-yellow-500 relative">
+          <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-[#FFCB05] relative">
             <span className="absolute top-0 right-0 bg-black text-white rounded-full px-1 py-0.5 text-[8px]">
               {totalQuantity}
             </span>
@@ -202,22 +209,24 @@ const Home = () => {
           <div>
             <button
               onClick={() => toggleView('grid')}
-              className={`mr-2 ${view === 'grid' ? 'bg-yellow-400' : 'bg-gray-200'} p-2 rounded`}
+              className={`mr-2 ${view === 'grid' ? 'bg-[#FFCB05]' : 'bg-gray-200'} p-2 rounded`}
             >
               <i className="fas fa-th-large"></i>
             </button>
             <button
               onClick={() => toggleView('list')}
-              className={`${view === 'list' ? 'bg-yellow-400' : 'bg-gray-200'} p-2 rounded`}
+              className={`${view === 'list' ? 'bg-[#FFCB05]' : 'bg-gray-200'} p-2 rounded`}
             >
               <i className="fas fa-list"></i>
             </button>
           </div>
         </div>
         {status === 'loading' ? (
-          <div className="flex justify-center items-center">
-            Loading...
-            <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24" />
+          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+            <div className="flex items-center">
+              Loading...
+              <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24 ml-2" />
+            </div>
           </div>
         ) : view === 'grid' ? (
           gridHTML
