@@ -2,8 +2,17 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchPokemon = createAsyncThunk('pokemon/fetchPokemon', async () => {
-  const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100');
-  return response.data.results;
+  const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12');
+  const pokemonData = await Promise.all(
+    response.data.results.map(async (pokemon) => {
+      const details = await axios.get(pokemon.url);
+      return {
+        name: details.data.name,
+        types: details.data.types.map((type) => type.type.name)
+      };
+    })
+  );
+  return pokemonData;
 });
 
 const pokemonSlice = createSlice({
@@ -11,6 +20,7 @@ const pokemonSlice = createSlice({
   initialState: {
     items: [],
     status: 'idle',
+    error: null
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -22,10 +32,11 @@ const pokemonSlice = createSlice({
         state.status = 'succeeded';
         state.items = action.payload;
       })
-      .addCase(fetchPokemon.rejected, (state) => {
+      .addCase(fetchPokemon.rejected, (state, action) => {
         state.status = 'failed';
+        state.error = action.error.message;
       });
-  },
+  }
 });
 
 export default pokemonSlice.reducer;

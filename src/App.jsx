@@ -6,6 +6,7 @@ import Detail from './components/Detail';
 import Pocket from './components/Pocket';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
   return (
