@@ -9,6 +9,11 @@ const Pocket = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const handleConfirm = async () => {
     const result = await Swal.fire({
       icon: 'question',
@@ -36,7 +41,7 @@ const Pocket = () => {
     const result = await Swal.fire({
       icon: 'warning',
       title: 'Are you sure?',
-      text: 'Remove this pokemon from your pocket?',
+      text: 'Remove this Pokémon from your pocket?',
       showCancelButton: true,
       confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'Cancel',
@@ -71,25 +76,32 @@ const Pocket = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {cartItems.map((item, index) => (
+                {cartItems.map((pokemon, index) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
-                          <img src={item.sprites.front_default} alt={item.name} />
+                          <img src={pokemon.sprites.front_default} alt={pokemon.name} className="h-10 w-10" />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{item.name}</div>
+                          <div className="text-sm font-medium text-gray-900">{capitalizeFirstLetter(pokemon.name)}</div>
+                          <div className="text-sm text-gray-900">
+                        {pokemon.types.map((type, index) => (
+                          <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
+                            {capitalizeFirstLetter(type)}
+                          </span>
+                        ))}
+                      </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.quantity}</div>
+                      <div className="text-sm text-gray-900">{pokemon.quantity}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
-                        onClick={() => handleRemove(item.id)}
-                        className="text-black hover:text-red-900"
+                        onClick={() => handleRemove(pokemon.id)}
+                        className="text-red-600 hover:text-red-900"
                       >
                         <i className="far fa-trash-can" />
                       </button>

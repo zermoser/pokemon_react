@@ -50,6 +50,7 @@ const Detail = () => {
       id: pokemon.id,
       name: pokemon.name,
       sprites: { front_default: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg` },
+      types: pokemon.types,
       quantity
     }));
     navigate('/pocket');
@@ -114,7 +115,7 @@ const Detail = () => {
               </div>
             </div>
             <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full md:w-2/3 rounded">
-              <div className="fa fa-shopping-bag mt-2 w-6 h-6 text-white"/>       
+              <i className="fa fa-shopping-bag mr-2"/>       
               Add To Pocket
             </button>
           </div>
