@@ -44,7 +44,7 @@ const Home = () => {
             <img 
               src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`} 
               alt={poke.name} 
-              className={`mx-auto ${view === 'list' ? 'w-32' : 'w-full'}`} 
+              className={`h-4/6 ${view === 'list' ? 'w-32' : 'w-full'}`} 
             />
             <div className={`${view === 'list' ? 'ml-4' : 'text-center'}`}>
               <h3 className="text-lg font-semibold mt-2">{poke.name}</h3>
