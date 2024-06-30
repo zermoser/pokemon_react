@@ -11,7 +11,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen px-20">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -19,8 +19,8 @@ const App = () => {
               <Route path="/pocket" element={<Pocket />} />
             </Routes>
           </main>
-          <Footer />
         </div>
+          <Footer />
       </Router>
     </Provider>
   );

@@ -12,8 +12,11 @@ const Navbar = () => {
       </Link>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">
-          <i className="far fa-user w-4 h-4 text-[#FFCB05]"></i>
+          <i className="far fa-user w-4 h-4 mr-1 text-[#FFCB05]"></i>
           Username
+        </div>
+        <div style={{ color: '#FFCB05' }}>
+          |
         </div>
         <div className="relative group">
           <Link to="/pocket" className="flex items-center group">

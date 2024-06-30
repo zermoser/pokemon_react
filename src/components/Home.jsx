@@ -11,7 +11,6 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isInputFocus, setIsInputFocus] = useState(false);
 
-
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchPokemon());
@@ -26,6 +25,11 @@ const Home = () => {
   // Function to handle search input change
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
+  };
+
+  // Function to clear search query
+  const clearSearchQuery = () => {
+    setSearchQuery('');
   };
 
   // Filtered pokemon based on search query
@@ -114,13 +118,23 @@ const Home = () => {
           onFocus={() => setIsInputFocus(true)}
           onBlur={() => setIsInputFocus(false)}
         />
-
+        {searchQuery && (
+          <button
+            className="absolute right-4 top-2 text-[#FFCB05] hover:text-gray-600 focus:outline-none"
+            onClick={clearSearchQuery}
+          >
+            <i className="fa-regular fa-circle-xmark"></i>
+          </button>
+        )}
         <i className="fa fa-search absolute left-2 top-3 text-[#FFCB05]"></i>
       </div>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">
-          <i className="far fa-user w-4 h-4 text-[#FFCB05]"></i>
+          <i className="far fa-user w-4 h-4 mr-1 text-[#FFCB05]"></i>
           Username
+        </div>
+        <div style={{ color: '#FFCB05' }}>
+          |
         </div>
         <div className="relative group">
           <Link to="/pocket" className="flex items-center group">

@@ -1,21 +1,56 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart } from '../features/cartSlice';
-import Navbar from './Navbar'
+import { removeFromCart, clearCart } from '../features/cartSlice';
+import Navbar from './Navbar';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 const Pocket = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
-  const handleCheckout = () => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Thanks, Pokemon will send to your Email',
+  const handleConfirm = async () => {
+    const result = await Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: 'Do you want to Process to Checkout',
+      reverseButtons: true,
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
     });
+
+    if (result.isConfirmed) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: "Thank you so much!"
+      });
+
+      dispatch(clearCart());
+      navigate('/');
+    }
   };
 
-  const handleRemove = (id) => {
-    dispatch(removeFromCart({ id }));
+  const handleRemove = async (id) => {
+    const result = await Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: 'Do you want to remove this item from your pocket?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#dc3545'
+    });
+
+    if (result.isConfirmed) {
+      dispatch(removeFromCart({ id }));
+      await Swal.fire({
+        icon: 'success',
+        title: 'Removed!',
+        text: 'Your item has been removed.',
+      });
+    }
   };
 
   const subtotal = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -71,7 +106,7 @@ const Pocket = () => {
               <p>Total Quantity: {subtotal}</p>
             </div>
             <button
-              onClick={handleCheckout}
+              onClick={handleConfirm}
               className="bg-red-500 text-white p-2 mt-4"
             >
               Process to Checkout
