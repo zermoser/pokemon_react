@@ -47,7 +47,7 @@ const Home = () => {
   const gridHTML = (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {filteredPokemon.length === 0 ? (
-        <div className="col-span-full flex items-center justify-center py-4">
+        <div className="col-span-full flex flex-col items-center justify-center py-4">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.4">
               <path d="M14.9849 14.9852L20.1408 20.1412" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
@@ -57,9 +57,11 @@ const Home = () => {
             <path opacity="0.4" d="M32.5832 32.5833L29.6665 29.6666" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
 
-          Oops! Nothing was found for &quot; {searchQuery} &quot;
-          <br />
-          Please try to search for something else.
+          <p className="text-center mt-2">
+            Oops! Nothing was found for &quot;{searchQuery}&quot;
+            <br />
+            Please try to search for something else.
+          </p>
         </div>
       ) : (
         filteredPokemon.map((poke, index) => (
@@ -96,9 +98,22 @@ const Home = () => {
   const listHTML = (
     <div className="flex flex-col">
       {filteredPokemon.length === 0 ? (
-        <div className="flex items-center justify-center py-4">Oops! Nothing was found for
-          &quot; {searchQuery} &quot; <br />
-          Please try to search for something else.</div>
+        <div className="col-span-full flex flex-col items-center justify-center py-4">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.4">
+              <path d="M14.9849 14.9852L20.1408 20.1412" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14.9851 20.1412L20.1411 14.9852" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
+            <path d="M17.2707 31.125C24.9221 31.125 31.1248 24.9222 31.1248 17.2708C31.1248 9.61935 24.9221 3.41663 17.2707 3.41663C9.61923 3.41663 3.4165 9.61935 3.4165 17.2708C3.4165 24.9222 9.61923 31.125 17.2707 31.125Z" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
+            <path opacity="0.4" d="M32.5832 32.5833L29.6665 29.6666" stroke="#373737" strokeWidth="2.1875" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+
+          <p className="text-center mt-2">
+            Oops! Nothing was found for &quot;{searchQuery}&quot;
+            <br />
+            Please try to search for something else.
+          </p>
+        </div>
       ) : (
         filteredPokemon.map((poke, index) => (
           <Link key={index} to={`/detail/${index + 1}`} className="border p-4 rounded-lg shadow-md bg-white flex items-center hover:bg-gray-100 transition-colors duration-300 ease-in-out">
