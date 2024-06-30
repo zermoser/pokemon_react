@@ -38,6 +38,11 @@ const Detail = () => {
     fetchPokemon();
   }, [pokemonId]);
 
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const handleAddToCart = () => {
     dispatch(addToCart({
       id: pokemon.id,
@@ -55,10 +60,6 @@ const Detail = () => {
       </div>
     );
   }
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   return (
     <div>
@@ -84,7 +85,10 @@ const Detail = () => {
             <p className="mt-2">
               <b>Stats</b>: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
             <p className="mt-2">
-              <b>Abilities</b>: {pokemon.abilities.map(ability => <span key={ability.ability.name} className="mr-1">{ability.ability.name} </span>)}</p>
+              <b>Abilities</b>: {pokemon.abilities.map(ability => (
+                <span key={ability.ability.name} className="mr-1">{capitalizeFirstLetter(ability.ability.name)} </span>
+              ))}
+            </p>
             <div className="flex items-center mt-4">
               <span className="mr-10"><b>Quantity</b>: </span>
               <div className="flex items-center border border-[#373737] rounded">
