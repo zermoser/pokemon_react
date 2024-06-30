@@ -8,6 +8,9 @@ const Home = () => {
   const pokemon = useSelector((state) => state.pokemon.items);
   const status = useSelector((state) => state.pokemon.status);
   const [view, setView] = useState('grid'); // State to manage view type (grid or list)
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isInputFocus, setIsInputFocus] = useState(false);
+
 
   useEffect(() => {
     if (status === 'idle') {
@@ -20,10 +23,20 @@ const Home = () => {
     setView(newView);
   };
 
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Filtered pokemon based on search query
+  const filteredPokemon = pokemon.filter((poke) =>
+    poke.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // Define grid and list HTML separately
   const gridHTML = (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {pokemon.map((poke, index) => (
+      {filteredPokemon.map((poke, index) => (
         <div key={index} className="h-full border mx-4 rounded-lg shadow-md bg-white">
           <div className="h-[250px] p-4 flex items-center justify-center">
             <img
@@ -53,7 +66,7 @@ const Home = () => {
 
   const listHTML = (
     <div className="flex flex-col">
-      {pokemon.map((poke, index) => (
+      {filteredPokemon.map((poke, index) => (
         <Link key={index} to={`/detail/${index + 1}`} className="border p-4 rounded-lg shadow-md bg-white flex items-center hover:bg-gray-100 transition-colors duration-300 ease-in-out">
           <div className="h-[128px] flex items-center justify-center">
             <img
@@ -83,11 +96,52 @@ const Home = () => {
     </div>
   );
 
+  // Define Navbar component
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const Navbar = (
+    <header className="flex justify-between items-center p-4">
+      <Link to="/" className="flex items-center">
+        <img src="/images/logo.png" alt="Logo" className="h-[57px] w-[156px]" />
+      </Link>
+      <div className="relative flex items-center">
+        <input
+          type="text"
+          placeholder="Search Pokémon by name ..."
+          className={`p-2 pl-8 pr-4 rounded bg-gray-200 focus:bg-white outline-none border ${isInputFocus ? 'border-yellow-400' : 'border-gray-300'}`}
+          value={searchQuery}
+          onChange={handleSearchChange}
+          onFocus={() => setIsInputFocus(true)}
+          onBlur={() => setIsInputFocus(false)}
+        />
+
+        <i className="fa fa-search absolute left-2 top-3 text-[#FFCB05]"></i>
+      </div>
+      <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
+          <i className="far fa-user w-4 h-4 text-[#FFCB05]"></i>
+          Username
+        </div>
+        <div className="relative group">
+          <Link to="/pocket" className="flex items-center group">
+            <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-yellow-500 relative">
+              <span className="absolute top-0 right-0 bg-black text-white rounded-full px-1 py-0.5 text-[8px]">
+                {totalQuantity}
+              </span>
+            </i>
+            <span className="ml-2 cursor-pointer">Pocket</span>
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+
   return (
     <div>
+      {Navbar}
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Products ({pokemon.length})</h2>
+          <h2 className="text-2xl font-bold">Products ({filteredPokemon.length})</h2>
           <div>
             <button
               onClick={() => toggleView('grid')}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { addToCart } from '../features/cartSlice';
+import Navbar from './Navbar'
 import axios from 'axios';
 
 const Detail = () => {
@@ -47,51 +48,54 @@ const Detail = () => {
   if (!pokemon) return <div>Loading...</div>;
 
   return (
-    <div className="p-4">
-      <Link to="/" className="flex items-center text-[#373737]">
-        <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        Back
-      </Link>
-      <div className="bg-white p-6 rounded-lg shadow-md flex items-center mt-4">
-        <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="w-1/3" />
-        <div className="ml-4">
-          <h2 className="text-2xl font-bold capitalize">{pokemon.name}</h2>
-          <div className="flex space-x-2 mt-2">
-            {pokemon.types.map((type, index) => (
-              <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
-                {type}
-              </span>
-            ))}
-          </div>
-          <p className="mt-2">Stats: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
-          <p className="mt-2">Abilities: {pokemon.abilities.map(ability => <span key={ability.ability.name} className="mr-1">{ability.ability.name} </span>)}</p>
-          <div className="flex items-center mt-4">
-            <span className="mr-10">Quantity:</span>
-            <div className="flex items-center border border-[#373737] rounded">
-              <button
-                onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                className="bg-white py-2 px-4 rounded-l"
-              >
-                -
-              </button>
-              <span className="bg-[#F5F5F5] py-2 px-6">{quantity}</span>
-              <button
-                onClick={() => setQuantity(q => q + 1)}
-                className="bg-white py-2 px-4 rounded-r"
-              >
-                +
-              </button>
+    <div>
+      <Navbar />
+      <div className="p-4">
+        <Link to="/" className="flex items-center text-[#373737]">
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </Link>
+        <div className="bg-white p-6 rounded-lg shadow-md flex items-center mt-4">
+          <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="w-1/3" />
+          <div className="ml-4">
+            <h2 className="text-2xl font-bold capitalize">{pokemon.name}</h2>
+            <div className="flex space-x-2 mt-2">
+              {pokemon.types.map((type, index) => (
+                <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
+                  {type}
+                </span>
+              ))}
             </div>
+            <p className="mt-2">Stats: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
+            <p className="mt-2">Abilities: {pokemon.abilities.map(ability => <span key={ability.ability.name} className="mr-1">{ability.ability.name} </span>)}</p>
+            <div className="flex items-center mt-4">
+              <span className="mr-10">Quantity:</span>
+              <div className="flex items-center border border-[#373737] rounded">
+                <button
+                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                  className="bg-white py-2 px-4 rounded-l"
+                >
+                  -
+                </button>
+                <span className="bg-[#F5F5F5] py-2 px-6">{quantity}</span>
+                <button
+                  onClick={() => setQuantity(q => q + 1)}
+                  className="bg-white py-2 px-4 rounded-r"
+                >
+                  +
+                </button>
+              </div>
 
+            </div>
+            <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
+              <svg className="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Add To Pocket
+            </button>
           </div>
-          <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
-            <svg className="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Add To Pocket
-          </button>
         </div>
       </div>
     </div>

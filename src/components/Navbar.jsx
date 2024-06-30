@@ -1,23 +1,15 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <header className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center p-4">
       <Link to="/" className="flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="h-8" />
+        <img src="/images/logo.png" alt="Logo" className="h-[57px] w-[156px]" />
       </Link>
-      <div className="relative flex items-center">
-        <input
-          type="text"
-          placeholder="Search Pokémon by name ..."
-          className="p-2 pl-8 pr-4 rounded bg-gray-200 focus:bg-white outline-none w-60 md:w-72 lg:w-80"
-        />
-        <i className="fa fa-search absolute left-2 top-3 text-[#FFCB05]"></i>
-      </div>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">
           <i className="far fa-user w-4 h-4 text-[#FFCB05]"></i>
@@ -34,8 +26,8 @@ const Header = () => {
           </Link>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 
-export default Header;
+export default Navbar;
