@@ -36,7 +36,7 @@ const Pocket = () => {
     const result = await Swal.fire({
       icon: 'warning',
       title: 'Are you sure?',
-      text: 'Do you want to remove this pokemon from your pocket?',
+      text: 'Remove this pokemon from your pocket?',
       showCancelButton: true,
       confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'Cancel',

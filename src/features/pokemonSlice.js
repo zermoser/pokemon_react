@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchPokemon = createAsyncThunk('pokemon/fetchPokemon', async () => {
-  const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12');
+  const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
   const pokemonData = await Promise.all(
     response.data.results.map(async (pokemon) => {
       const details = await axios.get(pokemon.url);

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { addToCart } from '../features/cartSlice';
-import Navbar from './Navbar'
+import Navbar from './Navbar';
 import axios from 'axios';
+
+import pikachuRunningGif from '../assets/pikachu-running.gif';
 
 const Detail = () => {
   const { id: pokemonId } = useParams();
@@ -45,7 +47,14 @@ const Detail = () => {
     }));
   };
 
-  if (!pokemon) return <div>Loading...</div>;
+  if (!pokemon) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+        <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -87,7 +96,6 @@ const Detail = () => {
                   +
                 </button>
               </div>
-
             </div>
             <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
               <svg className="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

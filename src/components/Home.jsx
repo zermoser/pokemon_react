@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemon } from '../features/pokemonSlice';
 import { Link } from 'react-router-dom';
+import pikachuRunningGif from '../assets/pikachu-running.gif';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -39,18 +40,48 @@ const Home = () => {
 
   // Define grid and list HTML separately
   const gridHTML = (
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filteredPokemon.map((poke, index) => (
-          <div key={index} className="h-full border mx-4 rounded-lg shadow-md bg-white">
-            <div className="h-[250px] p-4 flex items-center justify-center">
-              <img
-                src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`}
-                alt={poke.name}
-                className={`h-full w-full`}
-              />
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {filteredPokemon.map((poke, index) => (
+        <div key={index} className="h-full border mx-4 rounded-lg shadow-md bg-white">
+          <div className="h-[250px] p-4 flex items-center justify-center">
+            <img
+              src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`}
+              alt={poke.name}
+              className={`h-full w-full`}
+            />
+          </div>
+          <div className="h-[128px] bg-[#FAFAFA] p-3">
+            <h3 className="text-lg font-semibold">{poke.name}</h3>
+            <div className="space-x-2 my-1">
+              {(poke.types || []).map((type, idx) => (
+                <b
+                  key={idx}
+                  className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
+                >
+                  {type}
+                </b>
+              ))}
             </div>
-            <div className="h-[128px] bg-[#FAFAFA] p-3">
+            <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded">Detail</Link>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const listHTML = (
+    <div className="flex flex-col">
+      {filteredPokemon.map((poke, index) => (
+        <Link key={index} to={`/detail/${index + 1}`} className="border p-4 rounded-lg shadow-md bg-white flex items-center hover:bg-gray-100 transition-colors duration-300 ease-in-out">
+          <div className="h-[128px] flex items-center justify-center">
+            <img
+              src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`}
+              alt={poke.name}
+              className={`h-full w-32`}
+            />
+          </div>
+          <div className="h-[128px] ml-4 p-3 flex flex-col justify-between w-full">
+            <div>
               <h3 className="text-lg font-semibold">{poke.name}</h3>
               <div className="space-x-2 my-1">
                 {(poke.types || []).map((type, idx) => (
@@ -62,42 +93,11 @@ const Home = () => {
                   </b>
                 ))}
               </div>
-              <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded">Detail</Link>
+              <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.join(', ')}</p>
             </div>
           </div>
-        ))}
-    </div>
-  );
-
-  const listHTML = (
-      <div className="flex flex-col">
-        {filteredPokemon.map((poke, index) => (
-          <Link key={index} to={`/detail/${index + 1}`} className="border p-4 rounded-lg shadow-md bg-white flex items-center hover:bg-gray-100 transition-colors duration-300 ease-in-out">
-            <div className="h-[128px] flex items-center justify-center">
-              <img
-                src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`}
-                alt={poke.name}
-                className={`h-full w-32`}
-              />
-            </div>
-            <div className="h-[128px] ml-4 p-3 flex flex-col justify-between w-full">
-              <div>
-                <h3 className="text-lg font-semibold">{poke.name}</h3>
-                <div className="space-x-2 my-1">
-                  {(poke.types || []).map((type, idx) => (
-                    <b
-                      key={idx}
-                      className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
-                    >
-                      {type}
-                    </b>
-                  ))}
-                </div>
-                <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.join(', ')}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
+        </Link>
+      ))}
     </div>
   );
 
@@ -147,10 +147,9 @@ const Home = () => {
   );
 
   const NavbarSearchMobile = (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center">
       <Link to="/" className="flex items-center">
         <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
-
       </Link>
       <div className="relative flex items-center">
         <input
@@ -196,7 +195,7 @@ const Home = () => {
 
   return (
     <div>
-      {window.innerWidth < 768 ? NavbarSearchDesktop : NavbarSearchMobile}
+      {window.innerWidth <= 768 ? NavbarSearchDesktop : NavbarSearchMobile}
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Products ({filteredPokemon.length})</h2>
@@ -215,7 +214,16 @@ const Home = () => {
             </button>
           </div>
         </div>
-        {view === 'grid' ? gridHTML : listHTML}
+        {status === 'loading' ? (
+          <div className="flex justify-center items-center">
+            Loading...
+            <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24" />
+          </div>
+        ) : view === 'grid' ? (
+          gridHTML
+        ) : (
+          listHTML
+        )}
       </div>
     </div>
   );
