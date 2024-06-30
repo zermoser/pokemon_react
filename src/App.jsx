@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Detail from './components/Detail';
 import Pocket from './components/Pocket';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
@@ -12,11 +13,12 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div className="flex flex-col min-h-screen">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route path="/pocket" element={<Pocket />} />
-            </Routes>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/pocket" element={<Pocket />} />
+          </Routes>
           <Footer />
         </div>
       </Router>
