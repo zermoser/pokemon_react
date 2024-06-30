@@ -1,6 +1,26 @@
+import { useState, useEffect } from 'react';
+
 const NavbarHeader = () => {
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 600);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 600);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  if (!isDesktop) {
+    return null;
+  }
+
   return (
-    <div className="flex items-center justify-between py-2 bg-[#FFCB05] text-black text-xs sm:px-20">
+    <div className="flex items-center justify-between px-4 py-2 bg-[#FFCB05] text-black text-xs">
       <div>Welcome to Pokemon Shop!</div>
       <div className="flex space-x-4">
         <div className="flex items-center space-x-1">

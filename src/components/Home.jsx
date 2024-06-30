@@ -165,7 +165,7 @@ const Home = () => {
         <input
           type="text"
           placeholder="Search Pokémon by name ..."
-          className={`p-2 pl-8 pr-4 rounded bg-gray-200 focus:bg-white outline-none border ${isInputFocus ? 'border-yellow-400' : 'border-gray-300'}`}
+          className={`py-2 pl-8 md:px-[42px] lg:px-48 rounded bg-gray-200 focus:bg-white outline-none border ${isInputFocus ? 'border-yellow-400' : 'border-gray-300'}`}
           value={searchQuery}
           onChange={handleSearchChange}
           onFocus={() => setIsInputFocus(true)}
