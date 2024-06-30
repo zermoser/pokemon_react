@@ -100,13 +100,14 @@ const Home = () => {
     </div>
   );
 
-  // Define Navbar component
+  // NavbarSearch
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const Navbar = (
+  const NavbarSearch = (
     <header className="flex justify-between items-center p-4">
       <Link to="/" className="flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="h-[57px] w-[156px]" />
+        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
+
       </Link>
       <div className="relative flex items-center">
         <input
@@ -152,7 +153,7 @@ const Home = () => {
 
   return (
     <div>
-      {Navbar}
+      {NavbarSearch}
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Products ({filteredPokemon.length})</h2>

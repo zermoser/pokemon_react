@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, clearCart } from '../features/cartSlice';
 import Navbar from './Navbar';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';
 
 const Pocket = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const handleConfirm = async () => {
     const result = await Swal.fire({
@@ -36,7 +36,7 @@ const Pocket = () => {
     const result = await Swal.fire({
       icon: 'warning',
       title: 'Are you sure?',
-      text: 'Do you want to remove this item from your pocket?',
+      text: 'Do you want to remove this pokemon from your pocket?',
       showCancelButton: true,
       confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'Cancel',
@@ -61,13 +61,13 @@ const Pocket = () => {
       <div className="p-4">
         <div className="flex">
           <div className="w-2/3">
-            <h2>Pokemons in Pocket</h2>
+            <h2>Pokemons List ({cartItems.length})</h2>
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider">Product Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider">Quantity</th>
+                  <th />
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -89,9 +89,9 @@ const Pocket = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => handleRemove(item.id)}
-                        className="text-red-600 hover:text-red-900"
+                        className="text-black hover:text-red-900"
                       >
-                        Delete
+                        <i className="far fa-trash-can" />
                       </button>
                     </td>
                   </tr>

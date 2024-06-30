@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center p-4">
       <Link to="/" className="flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="h-[57px] w-[156px]" />
+        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">

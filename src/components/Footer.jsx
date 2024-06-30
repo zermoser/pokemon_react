@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="mt-4 p-4 bg-gray-800 text-center text-white">
-      Copyright Pokemon Shop
+      Copyright © 2024 Kittipoj Naewthavorn. All Rights Reserved.
     </footer>
   );
 };
