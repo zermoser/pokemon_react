@@ -11,9 +11,9 @@ const Pocket = () => {
 
   const handleConfirm = async () => {
     const result = await Swal.fire({
-      icon: 'warning',
-      title: 'Are you sure?',
-      text: 'Do you want to Process to Checkout',
+      icon: 'question',
+      title: 'Process to Checkout',
+      text: 'Click Submit to Checkout',
       reverseButtons: true,
       showCancelButton: true,
       confirmButtonText: 'Submit',

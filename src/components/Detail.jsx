@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { addToCart } from '../features/cartSlice';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
+
 
 import pikachuRunningGif from '../assets/pikachu-running.gif';
 
@@ -12,6 +14,7 @@ const Detail = () => {
   const [pokemon, setPokemon] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -50,6 +53,7 @@ const Detail = () => {
       sprites: { front_default: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg` },
       quantity
     }));
+    navigate('/pocket');
   };
 
   if (!pokemon) {
