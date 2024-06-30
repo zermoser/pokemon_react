@@ -36,12 +36,12 @@ const Home = () => {
             <h3 className="text-lg font-semibold">{poke.name}</h3>
             <div className="space-x-2 my-1">
               {(poke.types || []).map((type, idx) => (
-                <span
+                <b
                   key={idx}
                   className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
                 >
                   {type}
-                </span>
+                </b>
               ))}
             </div>
             <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded">Detail</Link>
@@ -54,29 +54,31 @@ const Home = () => {
   const listHTML = (
     <div className="flex flex-col">
       {pokemon.map((poke, index) => (
-        <div key={index} className="border p-4 rounded-lg shadow-md bg-white flex items-center">
-          <div className="h-[250px] flex items-center justify-center">
+        <Link key={index} to={`/detail/${index + 1}`} className="border p-4 rounded-lg shadow-md bg-white flex items-center hover:bg-gray-100 transition-colors duration-300 ease-in-out">
+          <div className="h-[128px] flex items-center justify-center">
             <img
               src={`https://img.pokemondb.net/artwork/${poke.name.toLowerCase()}.jpg`}
               alt={poke.name}
               className={`h-full w-32`}
             />
           </div>
-          <div className="h-[128px] bg-[#FAFAFA] ml-4">
-            <h3 className="text-lg font-semibold mt-2">{poke.name}</h3>
-            <div className="space-x-2 my-2">
-              {(poke.types || []).map((type, idx) => (
-                <span
-                  key={idx}
-                  className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
-                >
-                  {type}
-                </span>
-              ))}
+          <div className="h-[128px] ml-4 p-3 flex flex-col justify-between w-full">
+            <div>
+              <h3 className="text-lg font-semibold">{poke.name}</h3>
+              <div className="space-x-2 my-1">
+                {(poke.types || []).map((type, idx) => (
+                  <b
+                    key={idx}
+                    className={`text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]`}
+                  >
+                    {type}
+                  </b>
+                ))}
+              </div>
+              <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.join(', ')}</p> {/* Display abilities */}
             </div>
-            <Link to={`/detail/${index + 1}`} className="bg-black text-white p-2 mt-2 inline-block w-full text-center rounded">Detail</Link>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

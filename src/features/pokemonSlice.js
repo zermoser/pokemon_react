@@ -8,7 +8,8 @@ export const fetchPokemon = createAsyncThunk('pokemon/fetchPokemon', async () =>
       const details = await axios.get(pokemon.url);
       return {
         name: details.data.name,
-        types: details.data.types.map((type) => type.type.name)
+        types: details.data.types.map((type) => type.type.name),
+        abilities: details.data.abilities.map((ability) => ability.ability.name) // Add abilities here
       };
     })
   );
