@@ -4,8 +4,6 @@ import { store } from './store';
 import Home from './components/Home';
 import Detail from './components/Detail';
 import Pocket from './components/Pocket';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
@@ -13,7 +11,6 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div className="flex flex-col min-h-screen">
-          <Header />
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -21,7 +18,6 @@ const App = () => {
               <Route path="/pocket" element={<Pocket />} />
             </Routes>
           </main>
-          <Footer />
         </div>
       </Router>
     </Provider>
