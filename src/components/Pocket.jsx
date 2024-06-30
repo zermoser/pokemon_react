@@ -64,9 +64,9 @@ const Pocket = () => {
     <div>
       <Navbar />
       <div className="pt-4 pb-8 sm:px-20 bg-[#FAFAFA] h-full">
-        <div className="flex">
-          <div className="w-2/3">
-            <h2><b>Pokemons List ({cartItems.length})</b></h2>
+        <div className="flex flex-col sm:flex-row">
+          <div className="w-full sm:w-2/3 mb-4 sm:mb-0">
+            <h2 className="mb-4"><b>Pokemons List ({cartItems.length})</b></h2>
             <table className="min-w-full mt-3 divide-y divide-gray-200">
               <thead className="bg-white">
                 <tr>
@@ -111,7 +111,7 @@ const Pocket = () => {
               </tbody>
             </table>
           </div>
-          <div className="w-1/3 p-4 border-gray-200 relative">
+          <div className="w-full sm:w-1/3 p-4 border-gray-200 relative">
             <div className="bg-[#FFF9E3] rounded-t-lg p-4">
               <h2 className="text-lg font-semibold px-2">Order Summary</h2>
             </div>
