@@ -11,7 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 const App = () => {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename="/pokemon_react/"> {/* Set your basename here */}
         <div className="flex flex-col min-h-screen">
           <Header />
           <Routes>

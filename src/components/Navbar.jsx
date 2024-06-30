@@ -8,7 +8,7 @@ const Navbar = () => {
   const NavbarSearchMobile = (
     <div className="flex flex-col items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center mb-4">
-        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
+        <img src="/pokemon_react/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="flex items-center space-x-2 mb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@ const Navbar = () => {
   const NavbarSearchDesktop = (
     <div className="flex justify-between items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
+        <img src="/pokemon_react/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">

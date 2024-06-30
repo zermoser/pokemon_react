@@ -114,7 +114,7 @@ const Home = () => {
   const NavbarSearchMobile = (
     <div className="flex flex-col items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center mb-4">
-        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
+        <img src="/pokemon_react/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="relative flex items-center mb-4">
         <input
@@ -159,13 +159,13 @@ const Home = () => {
   const NavbarSearchDesktop = (
     <div className="flex justify-between items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
+        <img src="/pokemon_react/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="relative flex items-center">
         <input
           type="text"
           placeholder="Search Pokémon by name ..."
-          className={`py-2 pl-8 md:px-[42px] lg:px-48 rounded bg-gray-200 focus:bg-white outline-none border ${isInputFocus ? 'border-yellow-400' : 'border-gray-300'}`}
+          className={`py-2 pl-8 px-16 rounded bg-gray-200 focus:bg-white outline-none border ${isInputFocus ? 'border-yellow-400' : 'border-gray-300'}`}
           value={searchQuery}
           onChange={handleSearchChange}
           onFocus={() => setIsInputFocus(true)}
