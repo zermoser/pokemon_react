@@ -11,7 +11,10 @@ const Navbar = () => {
         <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
       <div className="flex items-center space-x-2 mb-4">
-        <i className="far fa-user w-4 h-4 mr-1 text-[#FFCB05]"></i>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4.75" stroke="#FFCB05" strokeWidth="1.5" />
+          <path d="M6 21C6 21 6 19.75 6 18.5C6 17.25 8.24914 16 12 16C15.7509 16 18 17.25 18 18.5C18 20.375 18 21 18 21" stroke="#FFCB05" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
         Username
       </div>
       <div className="relative group">
@@ -34,7 +37,10 @@ const Navbar = () => {
       </Link>
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">
-          <i className="far fa-user w-4 h-4 mr-1 text-[#FFCB05]"></i>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4.75" stroke="#FFCB05" strokeWidth="1.5" />
+            <path d="M6 21C6 21 6 19.75 6 18.5C6 17.25 8.24914 16 12 16C15.7509 16 18 17.25 18 18.5C18 20.375 18 21 18 21" stroke="#FFCB05" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
           Username
         </div>
         <div style={{ color: '#FFCB05' }}>
