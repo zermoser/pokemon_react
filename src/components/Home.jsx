@@ -138,7 +138,7 @@ const Home = () => {
       </div>
       <div className="flex items-center space-x-2 mb-4">
         <i className="far fa-user w-4 h-4 mr-1 text-[#FFCB05]"></i>
-        <span className="text-[#FFCB05]">Username</span>
+        Username
       </div>
       <div className="relative group">
         <Link to="/pocket" className="flex items-center group mb-4">
@@ -147,7 +147,7 @@ const Home = () => {
               {totalQuantity}
             </span>
           </i>
-          <span className="ml-2 cursor-pointer text-[#FFCB05]">Pocket</span>
+          &nbsp;Pocket
         </Link>
       </div>
     </div>
@@ -222,10 +222,10 @@ const Home = () => {
           </div>
         </div>
         {status === 'loading' ? (
-            <div className="flex items-center justify-center">
-              Loading...
-              <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24 ml-2" />
-            </div>
+          <div className="flex items-center justify-center">
+            Loading...
+            <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24 ml-2" />
+          </div>
         ) : view === 'grid' ? (
           gridHTML
         ) : (

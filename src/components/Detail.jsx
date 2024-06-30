@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
 
-
 import pikachuRunningGif from '../assets/pikachu-running.gif';
 
 const Detail = () => {
@@ -75,9 +74,9 @@ const Detail = () => {
           </svg>
           Back
         </Link>
-        <div className="bg-white p-6 rounded-lg shadow-md flex mt-4">
-          <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="h-2/3" />
-          <div className="ml-4">
+        <div className="bg-white p-6 rounded-lg shadow-md mt-4 md:flex">
+          <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="h-auto md:h-2/3 mx-auto md:ml-0 md:mr-4" />
+          <div className="mt-4 md:mt-0 md:w-2/3">
             <h2 className="text-2xl font-bold capitalize">{capitalizeFirstLetter(pokemon.name)}</h2>
             <div className="flex space-x-2 mt-2">
               {pokemon.types.map((type, index) => (
@@ -114,7 +113,7 @@ const Detail = () => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
+            <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full md:w-2/3 rounded">
               <div className="fa fa-shopping-bag mt-2 w-6 h-6 text-white"/>       
               Add To Pocket
             </button>
