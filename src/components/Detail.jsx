@@ -68,7 +68,7 @@ const Detail = () => {
   return (
     <div>
       <Navbar />
-      <div className="py-4 sm:px-20 bg-[#FAFAFA] h-full">
+      <div className="pt-4 pb-8 sm:px-20 bg-[#FAFAFA] h-full">
         <Link to="/" className="flex items-center text-[#373737]">
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

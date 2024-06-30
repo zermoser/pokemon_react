@@ -100,7 +100,7 @@ const Home = () => {
                   </b>
                 ))}
               </div>
-              <p className="mt-2"><strong>Abilities:</strong> {poke.abilities.map(ability => capitalizeFirstLetter(ability)).join(', ')}</p>
+              <p className="mt-2"><b>Abilities:</b> {poke.abilities.map(ability => capitalizeFirstLetter(ability)).join(', ')}</p>
             </div>
           </div>
         </Link>

@@ -63,16 +63,16 @@ const Pocket = () => {
   return (
     <div>
       <Navbar />
-      <div className="py-4 sm:px-20">
+      <div className="pt-4 pb-8 sm:px-20 bg-[#FAFAFA] h-full">
         <div className="flex">
           <div className="w-2/3">
-            <h2>Pokemons List ({cartItems.length})</h2>
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <h2><b>Pokemons List ({cartItems.length})</b></h2>
+            <table className="min-w-full mt-3 divide-y divide-gray-200">
+              <thead className="bg-white">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider">Product Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider">Quantity</th>
-                  <th />
+                  <th className="px-6 py-3 text-left font-medium w-4/6">Product Name</th>
+                  <th className="px-6 py-3 text-center font-medium w-1/6">Quantity</th>
+                  <th className="w-1/6 text-center" />
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -80,28 +80,28 @@ const Pocket = () => {
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img src={pokemon.sprites.front_default} alt={pokemon.name} className="h-10 w-10" />
+                        <div className="flex-shrink-0 h-20 w-20">
+                          <img src={pokemon.sprites.front_default} alt={pokemon.name} className="h-full w-full" />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{capitalizeFirstLetter(pokemon.name)}</div>
-                          <div className="text-sm text-gray-900">
-                        {pokemon.types.map((type, index) => (
-                          <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
-                            {capitalizeFirstLetter(type)}
-                          </span>
-                        ))}
-                      </div>
+                          <div className="text-sm font-medium">{capitalizeFirstLetter(pokemon.name)}</div>
+                          <div className="text-sm">
+                            {pokemon.types.map((type, index) => (
+                              <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3] mr-2 mt-1">
+                                {capitalizeFirstLetter(type)}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{pokemon.quantity}</div>
+                    <td className="px-6 py-4 text-center">
+                      <div className="text-sm">{pokemon.quantity}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td className="px-6 py-4 text-center">
                       <button
                         onClick={() => handleRemove(pokemon.id)}
-                        className="text-red-600 hover:text-red-900"
+                        className="text-black hover:text-red-500"
                       >
                         <i className="far fa-trash-can" />
                       </button>
@@ -111,18 +111,26 @@ const Pocket = () => {
               </tbody>
             </table>
           </div>
-          <div className="w-1/3 p-4 border-l border-gray-200">
-            <h2>Order Summary</h2>
-            <div className="text-sm">
-              <p>Subtotal: {subtotal} Products</p>
-              <p>Total Quantity: {subtotal}</p>
+          <div className="w-1/3 p-4 border-gray-200 relative">
+            <div className="bg-[#FFF9E3] rounded-t-lg p-4">
+              <h2 className="text-lg font-semibold px-2">Order Summary</h2>
             </div>
-            <button
-              onClick={handleConfirm}
-              className="bg-red-500 text-white p-2 mt-4"
-            >
-              Process to Checkout
-            </button>
+            <div className="text-sm py-4 px-6 bg-white">
+              <div className="flex justify-between mt-2 mb-4">
+                <p>Subtotal</p>
+                <p><b>{cartItems.length} Products</b></p>
+              </div>
+              <div className="flex justify-between mb-5">
+                <p>Total Quantity</p>
+                <p><b>{subtotal} Quantity</b></p>
+              </div>
+              <button
+                onClick={handleConfirm}
+                className="bg-[#FF6F61] text-white mt-4 p-4 w-full rounded hover:bg-red-500"
+              >
+                Process to Checkout
+              </button>
+            </div>
           </div>
         </div>
       </div>
