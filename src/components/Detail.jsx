@@ -85,8 +85,11 @@ const Detail = () => {
             <p className="mt-2">
               <b>Stats</b>: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
             <p className="mt-2">
-              <b>Abilities</b>: {pokemon.abilities.map(ability => (
-                <span key={ability.ability.name} className="mr-1">{capitalizeFirstLetter(ability.ability.name)} </span>
+              <b>Abilities</b>: {pokemon.abilities.map((ability, index) => (
+                <span key={ability.ability.name}>
+                  {index > 0 && ', '}
+                  {capitalizeFirstLetter(ability.ability.name)}
+                </span>
               ))}
             </p>
             <div className="flex items-center mt-4">
