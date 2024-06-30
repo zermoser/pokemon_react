@@ -19,7 +19,7 @@ const Navbar = () => {
       </div>
       <div className="relative group">
         <Link to="/pocket" className="flex items-center group mb-4">
-          <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-[#FFCB05] relative">
+          <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-yellow-300 relative text-[20px]">
             <span className="absolute top-0 right-0 bg-black text-white rounded-full px-1 py-0.5 text-[8px]">
               {totalQuantity}
             </span>
@@ -48,7 +48,7 @@ const Navbar = () => {
         </div>
         <div className="relative group">
           <Link to="/pocket" className="flex items-center group">
-            <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-yellow-500 relative">
+            <i className="fa fa-shopping-bag mt-2 w-6 h-6 text-[#FFCB05] group-hover:text-yellow-300 relative text-[20px]">
               <span className="absolute top-0 right-0 bg-black text-white rounded-full px-1 py-0.5 text-[8px]">
                 {totalQuantity}
               </span>
