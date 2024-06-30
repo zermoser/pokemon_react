@@ -56,31 +56,37 @@ const Detail = () => {
     );
   }
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <div>
       <Navbar />
-      <div className="p-4">
+      <div className="py-4 sm:px-20 bg-[#FAFAFA] h-full">
         <Link to="/" className="flex items-center text-[#373737]">
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Back
         </Link>
-        <div className="bg-white p-6 rounded-lg shadow-md flex items-center mt-4">
-          <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="w-1/3" />
+        <div className="bg-white p-6 rounded-lg shadow-md flex mt-4">
+          <img src={`https://img.pokemondb.net/artwork/${pokemon.name}.jpg`} alt={pokemon.name} className="h-2/3" />
           <div className="ml-4">
-            <h2 className="text-2xl font-bold capitalize">{pokemon.name}</h2>
+            <h2 className="text-2xl font-bold capitalize">{capitalizeFirstLetter(pokemon.name)}</h2>
             <div className="flex space-x-2 mt-2">
               {pokemon.types.map((type, index) => (
                 <span key={index} className="inline-block h-[24px] px-2 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
-                  {type}
+                  {capitalizeFirstLetter(type)}
                 </span>
               ))}
             </div>
-            <p className="mt-2">Stats: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
-            <p className="mt-2">Abilities: {pokemon.abilities.map(ability => <span key={ability.ability.name} className="mr-1">{ability.ability.name} </span>)}</p>
+            <p className="mt-2">
+              <b>Stats</b>: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
+            <p className="mt-2">
+              <b>Abilities</b>: {pokemon.abilities.map(ability => <span key={ability.ability.name} className="mr-1">{ability.ability.name} </span>)}</p>
             <div className="flex items-center mt-4">
-              <span className="mr-10">Quantity:</span>
+              <span className="mr-10"><b>Quantity</b>: </span>
               <div className="flex items-center border border-[#373737] rounded">
                 <button
                   onClick={() => setQuantity(q => Math.max(1, q - 1))}
@@ -98,9 +104,7 @@ const Detail = () => {
               </div>
             </div>
             <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
-              <svg className="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
+              <div className="fa fa-shopping-bag mt-2 w-6 h-6 text-white"/>       
               Add To Pocket
             </button>
           </div>

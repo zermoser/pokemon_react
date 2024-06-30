@@ -111,8 +111,8 @@ const Home = () => {
   // NavbarSearch
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const NavbarSearchDesktop = (
-    <div className="flex flex-col items-center">
+  const NavbarSearchMobile = (
+    <div className="flex flex-col items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center mb-4">
         <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
@@ -153,8 +153,8 @@ const Home = () => {
     </div>
   );
 
-  const NavbarSearchMobile = (
-    <div className="flex justify-between items-center">
+  const NavbarSearchDesktop = (
+    <div className="flex justify-between items-center pb-2 border-b-4 border-[#FAFAFA] sm:px-20 pt-2">
       <Link to="/" className="flex items-center">
         <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
@@ -202,8 +202,8 @@ const Home = () => {
 
   return (
     <div>
-      {window.innerWidth <= 768 ? NavbarSearchDesktop : NavbarSearchMobile}
-      <div className="p-4">
+      {window.innerWidth >= 768 ? NavbarSearchDesktop : NavbarSearchMobile}
+      <div className="py-4 sm:px-20">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Products ({filteredPokemon.length})</h2>
           <div>
@@ -222,12 +222,10 @@ const Home = () => {
           </div>
         </div>
         {status === 'loading' ? (
-          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               Loading...
               <img src={pikachuRunningGif} alt="Loading" className="h-24 w-24 ml-2" />
             </div>
-          </div>
         ) : view === 'grid' ? (
           gridHTML
         ) : (

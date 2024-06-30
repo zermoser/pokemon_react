@@ -12,13 +12,11 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div className="flex flex-col min-h-screen">
-          <main className="flex-grow px-4 py-8 sm:px-20">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/detail/:id" element={<Detail />} />
               <Route path="/pocket" element={<Pocket />} />
             </Routes>
-          </main>
           <Footer />
         </div>
       </Router>

@@ -58,7 +58,7 @@ const Pocket = () => {
   return (
     <div>
       <Navbar />
-      <div className="p-4">
+      <div className="py-4 sm:px-20">
         <div className="flex">
           <div className="w-2/3">
             <h2>Pokemons List ({cartItems.length})</h2>

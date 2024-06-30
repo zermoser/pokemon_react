@@ -6,7 +6,7 @@ const Navbar = () => {
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center pb-2 border-b-4 border-[#FAFAFA] px-20 pt-2">
       <Link to="/" className="flex items-center">
         <img src="/images/logo.png" alt="Logo" className="max-h-[57px] max-w-[156px]" />
       </Link>
