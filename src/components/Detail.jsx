@@ -2,35 +2,46 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { addToCart } from '../features/cartSlice';
-
-const mockPokemonData = {
-  id: 1,
-  name: 'bulbasaur',
-  types: ['grass', 'poison'],
-  stats: [
-    { stat: { name: 'hp' }, base_stat: 45 },
-    { stat: { name: 'attack' }, base_stat: 49 },
-    { stat: { name: 'defense' }, base_stat: 49 },
-    { stat: { name: 'special-attack' }, base_stat: 65 },
-    { stat: { name: 'special-defense' }, base_stat: 65 },
-    { stat: { name: 'speed' }, base_stat: 45 },
-  ],
-  abilities: [{ ability: { name: 'overgrow' } }, { ability: { name: 'chlorophyll' } }],
-};
+import axios from 'axios';
 
 const Detail = () => {
-  const { id } = useParams();
+  const { id: pokemonId } = useParams(); // Rename id to pokemonId to avoid naming conflict
   const [pokemon, setPokemon] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Mocking the API call with static data
-    setPokemon(mockPokemonData);
-  }, [id]);
+    const fetchPokemon = async () => {
+      try {
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        const pokemonData = {
+          id: response.data.id,
+          name: response.data.name,
+          types: response.data.types.map(type => type.type.name),
+          stats: response.data.stats.map(stat => ({
+            stat: { name: stat.stat.name },
+            base_stat: stat.base_stat
+          })),
+          abilities: response.data.abilities.map(ability => ({
+            ability: { name: ability.ability.name }
+          }))
+        };
+        setPokemon(pokemonData);
+      } catch (error) {
+        console.error('Error fetching Pokemon:', error);
+      }
+    };
+
+    fetchPokemon();
+  }, [pokemonId]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ id: pokemon.id, name: pokemon.name, sprites: { front_default: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg` }, quantity }));
+    dispatch(addToCart({
+      id: pokemon.id,
+      name: pokemon.name,
+      sprites: { front_default: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg` },
+      quantity
+    }));
   };
 
   if (!pokemon) return <div>Loading...</div>;
@@ -48,16 +59,10 @@ const Detail = () => {
         <div className="ml-4">
           <h2 className="text-2xl font-bold capitalize">{pokemon.name}</h2>
           <div className="flex space-x-2 mt-2">
-            {pokemon.types.map((type) => (
-              <span key={type} className={`px-2 py-1 rounded text-white ${type === 'grass' ? 'bg-green-500' : 
-                                  type === 'poison' ? 'bg-purple-500' : 
-                                  type === 'fire' ? 'bg-red-500' : 
-                                  type === 'water' ? 'bg-blue-500' : 
-                                  type === 'flying' ? 'bg-blue-300' : 
-                                  type === 'bug' ? 'bg-green-300' : 
-                                  'bg-gray-500'}`}>
+            {pokemon.types.map((type, index) => (
+              <b key={index} className="text-center h-[24px] w-[56px] p-1 rounded-[8px] text-[#FFAE33] bg-[#FFF4E3]">
                 {type}
-              </span>
+              </b>
             ))}
           </div>
           <p className="mt-2">Stats: {pokemon.stats.map(stat => <span key={stat.stat.name} className="mr-1">{stat.stat.name}: {stat.base_stat} </span>)}</p>
@@ -68,7 +73,10 @@ const Detail = () => {
             <span className="mx-2">{quantity}</span>
             <button onClick={() => setQuantity(q => q + 1)} className="bg-gray-200 p-2 rounded-r">+</button>
           </div>
-          <button onClick={handleAddToCart} className="bg-red-500 text-white p-2 mt-4 w-full rounded">
+          <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full rounded">
+            <svg className="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
             Add To Pocket
           </button>
         </div>
