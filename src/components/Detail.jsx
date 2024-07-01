@@ -114,7 +114,7 @@ const Detail = () => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full md:w-2/3 rounded">
+            <button onClick={handleAddToCart} className="bg-[#FF6F61] text-white p-2 mt-4 w-full md:w-2/3 rounded hover:bg-red-500">
               <i className="fa fa-shopping-bag mr-2"/>       
               Add To Pocket
             </button>
