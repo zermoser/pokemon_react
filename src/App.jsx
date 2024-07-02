@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import Home from './components/Home';
@@ -11,7 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 const App = () => {
   return (
     <Provider store={store}>
-      <Router basename="/pokemon_react/"> {/* Set your basename here */}
+      <Router basename="/">
         <div className="flex flex-col min-h-screen">
           <Header />
           <Routes>
